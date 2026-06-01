@@ -6,7 +6,7 @@ utils.readCfg = function (filename)
     local f = io.open(filename, "r")
 
     if not f then
-        return "Something went wrong while reading file"
+        return false, "Something went wrong while reading file"
     else
         local json_content = f:read("a")
         local json_parsed = json.decode(json_content)
