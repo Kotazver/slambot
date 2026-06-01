@@ -6,12 +6,23 @@ utils.readCfg = function (filename)
     local f = io.open(filename, "r")
 
     if not f then
-        io.write("Something went wrong while reading config file")
+        return "Something went wrong while reading file"
     else
         local json_content = f:read("a")
         local json_parsed = json.decode(json_content)
+        f:close()
         return json_parsed
     end
+end
 
-    io.flush()
+utils.writeCfg = function (filename, content)
+    local f = io.open(filename, "w")
+
+    if not f then
+        return "Something went wrong while writing file"
+    else
+        local jsonied_table = json.encode(content, {indent = true})
+
+        f:write(jsonied_table):close()
+    end
 end
