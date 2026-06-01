@@ -19,10 +19,13 @@ utils.writeCfg = function (filename, content)
     local f = io.open(filename, "w")
 
     if not f then
-        return "Something went wrong while writing file"
+        return false, "Something went wrong while writing file"
     else
         local jsonied_table = json.encode(content, {indent = true})
-
         f:write(jsonied_table):close()
+
+        return true
     end
 end
+
+return utils
